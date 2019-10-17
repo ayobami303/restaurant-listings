@@ -38,7 +38,7 @@ describe('Button Component', () => {
             buttonType: 'light',
             buttonText: 'Button',
             dataTest: 'app',
-            onClick: mockFunction
+            onClick: mockFunction()
         };
         let wrapper = shallow(<Button {...props} />);
 
