@@ -1,13 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 import './styles.scss';
 import AppTextHeader from '../../common/AppTextHeader';
 import Label from '../../common/Label';
 import RadioButton from '../../common/RadioButton';
 
-const Filters = (props) => {
-    const [sortBy, setSortBy] = useState('');
-    const [orderBy, setOrderBy] = useState('');
+const Filters = ({ sortBy, orderBy, setSortBy, setOrderBy }) => {
 
     function onChange(e) {
         if(e.target.name === "sort_by"){
@@ -15,6 +14,53 @@ const Filters = (props) => {
         }
         return setOrderBy(e.target.value);
     }
+
+    function createFilters(filters){
+        return filters.map((filter, index) => {
+            return (
+                <div className="row mb-4" key={index}>
+                    <div className="col">
+                        <Label labelText={filter.title} labelExtraClass="mb-2"/>
+                        {
+                            filter.buttons.map((button, index) => {
+                                return(
+                                    <div className="py-1" key={index}>
+                                        <RadioButton data-testid={button.testid} radioButtonName={filter.name} radioButtonValue={button.value} onChange={onChange} isChecked={sortBy===button.value} radioButtonLabel={button.label}/>
+                                    </div>
+                                );
+                            })
+                        }
+                    </div>
+                </div>
+            );
+        });
+    }
+
+    const filters = [{ 
+        title: 'Sort by', 
+        name: 'sort_by', 
+        buttons: [{ 
+            testid: 'sort-by-pricing', 
+            value: 'pricing', 
+            label: 'Restaurant pricing' 
+        }, { 
+            testid: 'sort-by-rating', 
+            value: 'rating', 
+            label: 'Restaurant ratings' 
+        }] 
+    }, { 
+        title: 'Order by', 
+        name: 'order_by', 
+        buttons: [{ 
+            testid: 'order-by-asc', 
+            value: 'asc', 
+            label: 'Lowest to Highest' 
+        }, { 
+            testid: 'order-by-desc', 
+            value: 'desc', 
+            label: 'Highest to Lowest' 
+        }] 
+    }];
 
     return (
         <div className="app-bg" data-testid="app-filter">
@@ -26,33 +72,26 @@ const Filters = (props) => {
                                 <AppTextHeader appTextHeaderExtraCSS='h6 text-center' text='Filter'/>
                             </div>
                         </div>
-                        <div className="row mb-4">
-                            <div className="col">
-                                <Label labelText="Sort by" labelExtraClass="mb-2"/>
-                                <div className="py-1">
-                                    <RadioButton radioButtonName="sort_by" radioButtonValue="pricing" onChange={onChange} isChecked={sortBy==="pricing"} radioButtonLabel="Restaurant pricing"/>
-                                </div>
-                                <div className="py-1">
-                                    <RadioButton radioButtonName="sort_by" radioButtonValue="rating" onChange={onChange} isChecked={sortBy==="rating"} radioButtonLabel="Restaurant ratings"/>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col">
-                                <Label labelText="Order by" labelExtraClass="mb-2"/>
-                                <div className="py-1">
-                                    <RadioButton radioButtonName="order_by" radioButtonValue="desc" onChange={onChange} isChecked={orderBy==="desc"} radioButtonLabel="Highest to Lowest"/>
-                                </div>
-                                <div className="py-1">
-                                    <RadioButton radioButtonName="order_by" radioButtonValue="asc" onChange={onChange} isChecked={orderBy==="asc"} radioButtonLabel="Lowest to Highest"/>
-                                </div>
-                            </div>
-                        </div>
+                        {createFilters(filters)}
                     </div>
                 </div>
             </div>
         </div>
     );
 }
- 
+
+Filters.defaultProps = {
+    sortBy: '',
+    orderBy: '',
+    setSortBy: () => { },
+    setOrderBy: () => { }
+};
+
+Filters.propTypes = {
+    sortBy: PropTypes.string.isRequired,
+    orderBy: PropTypes.string.isRequired,
+    setSortBy: PropTypes.func.isRequired,
+    setOrderBy: PropTypes.func.isRequired
+};
+
 export default Filters;

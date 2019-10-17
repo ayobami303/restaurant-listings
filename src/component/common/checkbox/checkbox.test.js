@@ -53,13 +53,13 @@ describe('Checkbox Component', () => {
             checkboxLabel: 'App checkbox',
             checkedValue: 'checkbox',
             isChecked: false,
-            onChange: mockFunction()
+            onChange: mockFunction
         };
         let wrapper = shallow(<Checkbox {...props} />);
 
         it('Should return input value without an error', () => {
             const checkboxComponent = findByTestAttr(wrapper, 'app-checkbox');
-            checkboxComponent.simulate('click');
+            checkboxComponent.simulate('change');
             const callback = mockFunction.mock.calls.length;
 
             expect(callback).toBe(1);

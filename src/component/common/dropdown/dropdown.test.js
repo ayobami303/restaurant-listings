@@ -44,13 +44,13 @@ describe('Dropdown Component', () => {
     describe('Dropdown onChange', () => {
         let mockFunction = jest.fn();
         const props = {
-            onChange: mockFunction()
+            onChange: mockFunction
         };
         let wrapper = setUp(props);
 
         it('Should call mock function without an error', () => {
             const dropdownComponent = findByTestAttr(wrapper, 'app-dropdown');
-            dropdownComponent.simulate('click');
+            dropdownComponent.simulate('change');
             const callback = mockFunction.mock.calls.length;
 
             expect(callback).toBe(1);
