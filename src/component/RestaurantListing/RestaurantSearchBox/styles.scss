@@ -17,17 +17,16 @@
 }
 
 .listDiv {
-  ul {
+  datalist {
     padding: 2px;
     // height: 200px;
     position: absolute;
     z-index: 1;
     width: 193px;
     background-color: #ffffff;
-    margin-top: 5px;
+    margin-top: 1px;
     display: none;
   }
-
   .dropDownList {
     border-bottom: 1px solid;
     cursor: pointer;
@@ -35,10 +34,6 @@
   }
 }
 
-input:focus + ul {
-  display: block !important;
-}
-
-.form-control:focus + ul {
-  display: block !important;
-}
+// .listDiv:hover .dropDown {
+//   display: block !important;
+// }

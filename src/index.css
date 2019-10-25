@@ -18,3 +18,10 @@ code {
 .app-bg {
   background-color: #ececec;
 }
+
+.truncate {
+  width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

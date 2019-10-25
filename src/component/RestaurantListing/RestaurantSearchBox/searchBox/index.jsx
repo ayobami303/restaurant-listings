@@ -5,17 +5,22 @@ import './styles.scss';
 const SearchBox = ({ value, result, onChange, message }) => {
 
   function displayList() {
-    let locations = [];
-    locations = value && result.filter((location) => location.city_name.toLowerCase().match(value));
-    if (locations.length > 0)
-      return (locations.map((location, index) => (<div data-testid="app-search-item" className="dropDownList" key={index}>{location.title}</div>)));
-    return (<div>{message}</div>)
+    if (result.length > 0)
+      return (
+          result.map((location, index) => (
+            <option data-testid="app-search-item" className="dropDownList" key={index}>{location.title}</option>)
+          )
+        );
+    return (<option>{message}</option>)
   }
 
   return (
     <div className="listDiv">
-      <input data-testid="app-search-box" className="form-control" value={value} type="text" autoComplete="no" onChange={(event) => onChange(event)}/>
-      <ul className="">{displayList()}</ul>
+      <input list="browsers" name="browsers" data-testid="app-search-box" className="form-control" value={value} type="text" autoComplete="no" onChange={(event) => onChange(event)}/> 
+      <datalist id="browsers" className="dropDown truncate">
+        {displayList()}
+      </datalist>
+      {/* <ul className="dropDown truncate" >{displayList()}</ul> */}
     </div>
   )
 }
