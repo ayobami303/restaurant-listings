@@ -46,8 +46,8 @@ export const RestaurantListing = ({ categories }) => {
     };
 
     const handleChangeRowsPerPage = event => {
-        setRowsPerPage(parseInt(event.target.value, rowsPerPage));
         setPage(0);
+        setRowsPerPage(parseInt(event.target.value));
     };
 
     const responseHandle = (message) => (<div className="centralize"> {message} </div>)
