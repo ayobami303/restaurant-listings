@@ -1,6 +1,7 @@
 import React from "react";
 import { shallow } from 'enzyme';
 import Card from "./";
+import CardContent from './content';
 import { findByTestAttr, checkProps } from "../../../../utils";
 
 const expectedProps = {
@@ -8,20 +9,27 @@ const expectedProps = {
   cardExtraClass: '', 
   linkText: 'View More',
   cardTitle: 'Card Title', 
-  cardContent: 'Some quick example text to build on the card title and make up the bulk of the cards content.', 
+  location: {locality: 'abuja'},
+  cuisines: 'cusins',
+  timings: '11:00 Pm',
+  user_rating: {rating_color: 'fffff', aggregate_rating: 4},
+  cost_for_two: 44,
+  currency: '$',
   onClick: () => {}
 };
 
-const setup = (props={}) => {
-    const componentProps= {
-        ...expectedProps,
-        ...props
-    };
+const contentProps = {
+    label: 'fine apple',
+    content: 'fine apple',
+    labelClass: 'fine apple',
+    contentClass: 'fine apple',
+}
 
-    let component = shallow(<Card {...componentProps} />);
-    return component;
+const setup = ( Component, defaultProps, props={} ) => {
+    const componentProps= { ...defaultProps, ...props };
+
+    return shallow(<Component {...componentProps} />);
 };
-
 
 describe('Card Component', () => {
     describe('Checking propTypes', () => {
@@ -32,7 +40,7 @@ describe('Card Component', () => {
     });
 
     describe('Card render', () => {
-        let wrapper = setup();
+        let wrapper = setup(Card, expectedProps);
         
         it('Should render card without an error', () => {
             const cardComponent = findByTestAttr(wrapper, 'app-card');
@@ -42,7 +50,7 @@ describe('Card Component', () => {
 
     describe('Card onClick', () => {
         let mockFunction = jest.fn();
-        let wrapper = setup({ onChange: mockFunction()});
+        let wrapper = setup(Card, expectedProps, { onChange: mockFunction()});
 
         it('Should call mock function without an error', () => {
             const cardComponent = findByTestAttr(wrapper, 'app-card');
@@ -50,6 +58,23 @@ describe('Card Component', () => {
             const callback = mockFunction.mock.calls.length;
 
             expect(callback).toBe(1);
+        });
+    });
+})
+
+describe('Content Component', () => {
+    describe('Checking proptypes', () => {
+        it('should not throw an errow', () => {
+            const cardError = checkProps(CardContent, contentProps);
+            expect(cardError).toBeUndefined();
+        });
+    });
+    describe('Content Render', () => {
+        let wrapper = setup(CardContent, contentProps);
+        
+        it('should render content in card without an error', () => {
+            const contentComponent = findByTestAttr(wrapper, 'app-content');
+            expect(contentComponent.length).toBe(1);
         });
     });
 })

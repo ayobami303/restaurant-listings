@@ -42,7 +42,9 @@ export const filterRestaurantResult = (result) => {
             photos: restaurant.photos,
             thumb: restaurant.thumb,
             timings: restaurant.timings,
-            user_rating: restaurant.user_rating
+            user_rating: restaurant.user_rating,
+            currency: restaurant.currency,
+            cost_for_two: restaurant.average_cost_for_two,
         };
         return obj;
     })

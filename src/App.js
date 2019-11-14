@@ -16,7 +16,7 @@ import RestaurantDetails from './component/RestaurantDetails/index.js';
 export function App() {
     return(
         <div className="container">
-            <div className="row m-5">
+            <div className="row my-5">
                 <div className="col">
                     <Router>
                         <Switch>

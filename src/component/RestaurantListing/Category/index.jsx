@@ -20,7 +20,7 @@ export const Category = ({ categories, checkedCategories, setCheckedCategories }
     const checkBoxList = categories.length ? categories.map(
         ({ categories: { id, name} }, index) => (
             <div className="mb-1" key={index}>
-                <CheckBox data-testid="app-category-item" checkedValue={index} onChange={updateCategories} isChecked={checkedCategories[index] === index} checkboxLabel={name}/>
+                <CheckBox data-testid="app-category-item" checkedValue={id} onChange={updateCategories} isChecked={checkedCategories[id] === id} checkboxLabel={name}/>
             </div>
         )
     ) : <AppText data-testid="no-category" text="No Categories found" appTextExtraCSS="text-center" />;

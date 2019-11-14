@@ -3,7 +3,7 @@ import TablePagination from '@material-ui/core/TablePagination';
 
 const Pagination = ({ rows, page, rowsPerPage, handleChangePage, handleChangeRowsPerPage }) => {
   const rowsPerPageOptions = [12, 18, 24];
-  return ( 
+  return (
     <TablePagination
         data-testid="app-pagination"
         rowsPerPageOptions={rowsPerPageOptions}
